@@ -1,0 +1,74 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h1>🔐 Iniciar Sesión</h1>
+      <p class="subtitle">Bienvenido a Login-Angular</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <!-- Campo de Usuario -->
+      <div class="form-group">
+        <label for="username">Usuario</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          class="form-control"
+          [class.error]="username?.invalid && (username?.dirty || username?.touched || loginAttempted)"
+          placeholder="Ingresa tu usuario"
+        />
+        <div
+          class="error-message"
+          *ngIf="username?.invalid && (username?.dirty || username?.touched || loginAttempted)"
+        >
+          {{ getUsernameError() }}
+        </div>
+      </div>
+
+      <!-- Campo de Contraseña -->
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          [class.error]="password?.invalid && (password?.dirty || password?.touched || loginAttempted)"
+          placeholder="Ingresa tu contraseña"
+        />
+        <div
+          class="error-message"
+          *ngIf="password?.invalid && (password?.dirty || password?.touched || loginAttempted)"
+        >
+          {{ getPasswordError() }}
+        </div>
+      </div>
+
+      <!-- Mensajes de resultado -->
+      <div class="success-message" *ngIf="loginSuccess">
+        ✅ ¡Inicio de sesión exitoso!
+      </div>
+
+      <div class="login-error-message" *ngIf="loginError">
+        ❌ Usuario o contraseña incorrectos
+      </div>
+
+      <!-- Botones -->
+      <div class="button-group">
+        <button type="submit" class="btn btn-primary">
+          Iniciar Sesión
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="onReset()">
+          Limpiar
+        </button>
+      </div>
+    </form>
+
+    <!-- Credenciales de prueba -->
+    <div class="test-credentials">
+      <p class="test-title">🔑 Credenciales de Prueba:</p>
+      <p><strong>Usuario:</strong> admin</p>
+      <p><strong>Contraseña:</strong> admin123</p>
+    </div>
+  </div>
+</div>
